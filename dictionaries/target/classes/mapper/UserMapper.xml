@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--        mapper的namespace指定了该xml文件指向的Mapper接口，里面的sql语句接受传来的username数据进行数据访问。-->
+<!--        语句的id="getAgeByUsername"则是对应mapper接口中的方法，resultType="int"指定本次数据访问的数据返回类型。-->
+<mapper namespace="com.springboot.mapper.UserMapper">
+    <resultMap id="ResultMap" type="com.springboot.po.UserPO">
+        <result column="IP" jdbcType="VARCHAR" property="ip"/>
+        <result column="PORT" jdbcType="VARCHAR" property="port"/>
+        <result column="DBS_NAME" jdbcType="VARCHAR" property="dbsName"/>
+        <result column="USR_NAME" jdbcType="VARCHAR" property="usrName"/>
+        <result column="UPD_CODE" jdbcType="VARCHAR" property="updCode"/>
+        <result column="UPD_NAME" jdbcType="VARCHAR" property="updName"/>
+        <result column="UPD_TIME" jdbcType="VARCHAR" property="updTime"/>
+        <result column="UU_ID" jdbcType="VARCHAR" property="uuId"/>
+        <result column="DBS_CODE" jdbcType="VARCHAR" property="dbsCode"/>
+        <result column="SYS_CODE" jdbcType="VARCHAR" property="sysCode"/>
+        <result column="DBS_TYPE" jdbcType="VARCHAR" property="dbsType"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        IP,PORT,DBS_NAME,USR_NAME,UPD_CODE,UPD_NAME,UPD_TIME,UU_ID,DBS_CODE,SYS_CODE
+    </sql>
+    <select id="getDataByUsername" parameterType="com.springboot.po.UserPO"
+            resultMap="ResultMap">
+        SELECT * FROM DEV_DBS WHERE (DBS_NAME='${dbsName}')
+    </select>
+    <delete id="deleteField" parameterType="String">
+        DELETE FROM DEV_TAB_D WHERE TAB_NAME='${tabname}' AND  FIE_NAME='${field}'
+    </delete>
+    <delete id="deleteTableData" parameterType="String">
+        DELETE FROM ${DevTab} WHERE TAB_NAME ='${tabname}'
+    </delete>
+    <select id="getNameByUsername" parameterType="com.springboot.po.UserPO"
+            resultMap="ResultMap">
+        SELECT UU_ID,DBS_CODE,DBS_TYPE,IP,PORT,DBS_NAME,USR_NAME UPD_CODE,UPD_NAME,UPD_TIME FROM DEV_DBS WHERE DBS_NAME ='${UserPO.dbsName}'
+    </select>
+</mapper>

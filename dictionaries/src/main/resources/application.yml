@@ -1,0 +1,19 @@
+server:
+  port: 1234
+  servlet:
+    context-path: /cn
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@192.168.168.105:1521:ZLORANEW
+    username: devnew
+    password: devpass
+    driver-class-name: oracle.jdbc.OracleDriver
+logging:
+  level:
+    com.springboot: debug
+
+# rs专用配置
+mybatis:
+  mapper-locations:
+    - classpath*:mapper/*.xml

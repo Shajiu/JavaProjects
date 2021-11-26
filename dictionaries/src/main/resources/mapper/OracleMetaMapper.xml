@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--        mapper的namespace指定了该xml文件指向的Mapper接口，里面的sql语句接受传来的username数据进行数据访问。-->
+<!--        语句的id="getAgeByUsername"则是对应mapper接口中的方法，resultType="int"指定本次数据访问的数据返回类型。-->
+<mapper
+    namespace="com.springboot.mapper.OracleMetaMapper">
+</mapper>
