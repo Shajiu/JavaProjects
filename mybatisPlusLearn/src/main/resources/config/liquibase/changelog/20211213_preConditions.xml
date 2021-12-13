@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.8"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.8
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.8.xsd">
+    <preConditions>
+        <dbms type="oracle" />
+        <runningAs username="DEVNEW" />
+    </preConditions>
+
+    <changeSet id="1" author="bob">
+        <preConditions onFail="WARN">
+            <sqlCheck expectedResult="0">select count(*) from table_member</sqlCheck>
+        </preConditions>
+        <comment>Comments should go after preCondition. If they are before then liquibase
+            usually gives error.</comment>
+        <dropTable tableName="table_member"/>
+    </changeSet>
+</databaseChangeLog>

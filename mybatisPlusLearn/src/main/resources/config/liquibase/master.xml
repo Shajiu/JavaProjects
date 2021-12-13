@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!--条件之间可以使用AND/OR/NOT进行拼接来构建复杂的环境，默认为and-->
+    <preConditions>
+        <or>
+          <and>
+             <dbms type="oracle"/>
+             <runningAs username="DEVNEW"/>
+          </and>
+        <and>
+            <dbms type="mssql" />
+            <runningAs username="root" />
+        </and>
+        </or>
+    </preConditions>
+
+     <!--include 用来在root change log file中引入其他的change log file方法-->
+    <include file="config/liquibase/changelog/202112131447_add_entity_Base.xml" relativeToChangelogFile="false"/>
+
+    <!--changeSet 限制changeSer是否执行，可将changeSet进行分组，若不设置context,该changeSet将总是执行。context可以具有任意名称大小写不敏感-->
+    <changeSet id="2" author="bob" context="test">
+        <insert tableName="table_member">
+            <column name="ID" value="2"/>
+            <column name="MOBILE" value="Liquibase 0.9 ReleasedV2"/>
+            <column name="STATUS" value="STATUSV2"/>
+            <column name="LAST_MODIFIED_BY" value="LAST_MODIFIED_BYV2"/>
+        </insert>
+    </changeSet>
+
+    <!--databaseChangelog或changeSet来控制执行-->
+    <changeSet id="1" author="沙九">
+        <preConditions onFail="WARN">
+            <sqlCheck expectedResult="0">select count(*) from SHAJIU</sqlCheck>
+        </preConditions>
+        <comment>Comments should go after preCondition. If they are  before then liquibase
+            usually gives error.</comment>
+        <dropTable tableName="SHAJIU"/>
+    </changeSet>
+
+    <!--Use change set-->
+    <changeSet id="2" author="bob">
+        <dropTable tableName="testTable"/>
+        <rollback changeSetId="1" changeSetAuthor="bob"/>
+    </changeSet>
+</databaseChangeLog>

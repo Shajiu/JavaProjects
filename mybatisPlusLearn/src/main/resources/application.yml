@@ -1,0 +1,37 @@
+server:
+  port: 1234
+servlet:
+  context-path: /cn
+
+mybatis:
+  mapper-locations:
+    - classpath*:mapper/*.xml
+
+#  springboot中mybatis打印sql语句
+logging:
+  level:
+    com.example.mybatis_plus.mybatis_plus_learn.mapper: DEBUG   # 包路径为mapper文件路径
+
+spring:
+  datasource:
+#    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
+#    driver-class-name: com.mysql.jdbc.Driver
+#    username: root
+#    password: root
+    # 如下为Oracle数据源
+    url: jdbc:oracle:thin:@192.168.168.105:1521:ZLORANEW
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: devnew
+    password: devpass
+
+liquibase:
+  user: devnew
+  password: devpass
+  url: jdbc:oracle:thin:@192.168.168.105:1521:ZLORANEW
+  enabled: true
+  drop-first: false
+  contexts: dev,faker
+  change-log: classpath:config/liquibase/master.xml
+
+
+

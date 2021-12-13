@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql"/>
+
+    <changeSet id="20171202205" author="WATER" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="table_member"/>
+            </not>
+        </preConditions>
+        <createTable tableName="table_member">
+            <column name="id" type="bigint" autoIncrement="true"   remarks="主键"   >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="mobile" type="varchar(50)"   remarks="手机号"  >
+                <constraints nullable="false" />
+            </column>
+            <column name="status" type="varchar(10)" remarks="账号状态"   />
+            <column name="last_modified_by" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
